@@ -10,13 +10,10 @@ import utils.TokenManager;
 public class UserTest extends BaseTest {
 
     @Test
-    public void getCurrentUser(){
+    public void getCurrentUser() {
 
         Response response = request
-                .header(
-                        "Authorization",
-                        "Bearer " + TokenManager.getToken()
-                )
+                .header("Authorization", "Bearer " + TokenManager.getToken())
                 .when()
                 .get(Routes.CURRENT_USER);
 
@@ -24,13 +21,14 @@ public class UserTest extends BaseTest {
 
         Assert.assertEquals(
                 response.statusCode(),
-                200
+                200,
+                "Expected successful response"
         );
     }
 
-
     @Test
-    public void getAddresses(){
+    public void getAddresses() {
+
         Response response = request
                 .header("Authorization", "Bearer " + TokenManager.getToken())
                 .when()
@@ -38,12 +36,10 @@ public class UserTest extends BaseTest {
 
         response.then().log().all();
 
-        int statusCode = response.statusCode();
-
-        System.out.println("Status Code: " + statusCode);
-        if(statusCode == 429){
+        if (response.statusCode() == 429) {
             Assert.fail("Rate limit exceeded. Try again later");
         }
-        Assert.assertEquals(statusCode,200, "Expected successful response");
+
+        response.then().statusCode(200);
     }
 }
