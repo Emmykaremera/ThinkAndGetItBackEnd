@@ -52,13 +52,6 @@ public class AuthTest extends BaseTest {
 
         Assert.assertEquals(response.statusCode(), 200);
 
-//        String token = response.jsonPath().getString("data.token");
-//
-//        System.out.println("TOKEN: " + token);
-//
-//        Assert.assertNotNull(token);
-
-
         String token =
                 response.jsonPath()
                         .getString("data.token");
