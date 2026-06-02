@@ -19,6 +19,6 @@ public class TestData {
     }
 
     public static String updatedPhone() {
-        return "+250789111111";
+        return "+250791376494";
     }
 }
