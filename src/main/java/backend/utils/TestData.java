@@ -1,4 +1,4 @@
-package utils;
+package backend.utils;
 
 public class TestData {
 
@@ -20,5 +20,19 @@ public class TestData {
 
     public static String updatedPhone() {
         return "+250791376494";
+    }
+
+    public static String profileBody(String firstName, String lastName, String phone) {
+        return String.format("""
+                {
+                  "firstName": "%s",
+                  "lastName": "%s",
+                  "phone": "%s"
+                }
+                """,
+                firstName,
+                lastName,
+                phone
+        );
     }
 }

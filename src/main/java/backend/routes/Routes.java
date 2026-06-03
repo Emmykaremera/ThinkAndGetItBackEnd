@@ -1,5 +1,4 @@
-
-package BackEnd.routes;
+package backend.routes;
 
 public class Routes {
 

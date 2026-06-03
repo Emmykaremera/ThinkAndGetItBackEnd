@@ -1,37 +1,23 @@
 package tests;
 
-import BackEnd.routes.Routes;
-import base.BaseTest;
+import backend.application.UserAPI;
+import backend.utils.TestData;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.TokenManager;
-import utils.TestData;
 
-public class UpdateProfileTest extends BaseTest {
+public class UpdateProfileTest {
+
+    UserAPI userAPI = new UserAPI();
 
     @Test
     public void updateProfileWithAllFields() {
 
-        String requestBody = String.format("""
-                {
-                    "firstName":"%s",
-                    "lastName":"%s",
-                    "phone":"%s"
-                }
-                """,
+        Response response = userAPI.updateProfile(
                 TestData.validFirstName(),
                 TestData.validLastName(),
                 TestData.validPhone()
         );
-
-        Response response = request
-                .header("Authorization", "Bearer " + TokenManager.getToken())
-                .body(requestBody)
-                .when()
-                .put(Routes.UPDATE_PROFILE);
-
-        response.then().log().all();
 
         Assert.assertEquals(response.statusCode(), 200);
     }
@@ -39,21 +25,11 @@ public class UpdateProfileTest extends BaseTest {
     @Test
     public void updateProfileWithFirstNameOnly() {
 
-        String requestBody = String.format("""
-                {
-                    "firstName":"%s"
-                }
-                """,
-                TestData.updatedFirstName()
+        Response response = userAPI.updateProfile(
+                TestData.updatedFirstName(),
+                TestData.validLastName(),
+                TestData.validPhone()
         );
-
-        Response response = request
-                .header("Authorization", "Bearer " + TokenManager.getToken())
-                .body(requestBody)
-                .when()
-                .put(Routes.UPDATE_PROFILE);
-
-        response.then().log().all();
 
         Assert.assertEquals(response.statusCode(), 200);
     }
@@ -61,21 +37,11 @@ public class UpdateProfileTest extends BaseTest {
     @Test
     public void updateProfileWithPhoneOnly() {
 
-        String requestBody = String.format("""
-                {
-                    "phone":"%s"
-                }
-                """,
+        Response response = userAPI.updateProfile(
+                TestData.validFirstName(),
+                TestData.validLastName(),
                 TestData.updatedPhone()
         );
-
-        Response response = request
-                .header("Authorization", "Bearer " + TokenManager.getToken())
-                .body(requestBody)
-                .when()
-                .put(Routes.UPDATE_PROFILE);
-
-        response.then().log().all();
 
         Assert.assertEquals(response.statusCode(), 200);
     }
@@ -83,20 +49,9 @@ public class UpdateProfileTest extends BaseTest {
     @Test
     public void updateProfileWithoutToken() {
 
-        String requestBody = """
-                {
-                    "firstName":"John",
-                    "lastName":"Doe",
-                    "phone":"+250789000000"
-                }
-                """;
-
-        Response response = request
-                .body(requestBody)
-                .when()
-                .put(Routes.UPDATE_PROFILE);
-
-        response.then().log().all();
+        Response response = userAPI.updateProfileWithoutToken(
+                TestData.profileBody("John", "Doe", "+250789000000")
+        );
 
         Assert.assertEquals(response.statusCode(), 401);
     }
@@ -104,21 +59,9 @@ public class UpdateProfileTest extends BaseTest {
     @Test
     public void updateProfileWithInvalidToken() {
 
-        String requestBody = """
-                {
-                    "firstName":"John",
-                    "lastName":"Doe",
-                    "phone":"+250789000000"
-                }
-                """;
-
-        Response response = request
-                .header("Authorization", "Bearer invalidtoken123")
-                .body(requestBody)
-                .when()
-                .put(Routes.UPDATE_PROFILE);
-
-        response.then().log().all();
+        Response response = userAPI.updateProfileWithInvalidToken(
+                TestData.profileBody("John", "Doe", "+250789000000")
+        );
 
         Assert.assertEquals(response.statusCode(), 401);
     }

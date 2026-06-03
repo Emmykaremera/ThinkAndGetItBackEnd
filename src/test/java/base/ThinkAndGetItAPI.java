@@ -1,9 +1,9 @@
 package base;
 
-import BackEnd.routes.Routes;
+import backend.routes.Routes;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import utils.ConfigReader;
+import backend.utils.ConfigReader;
 
 public class ThinkAndGetItAPI {
 
