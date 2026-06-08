@@ -8,6 +8,7 @@ on:
       - f/GetCategories
       - f/UpdateProfile
       - f/users
+      - ft/Cart
 
   pull_request:
     branches:

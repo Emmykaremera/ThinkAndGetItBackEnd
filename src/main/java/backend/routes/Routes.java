@@ -26,4 +26,6 @@ public class Routes {
 
     public static final String GET_CATEGORIES = "/categories";
 
+    public static final String GET_CART="/cart";
+
 }
