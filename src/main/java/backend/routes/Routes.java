@@ -34,6 +34,12 @@ public class Routes {
 
     public static final String FLASH_SALES_PRODUCTS = "/products/flash-sales";
 
+    public static final String SEARCH_PRODUCTS = "/search";
+
+    public static final String GET_PRODUCT_REVIEWS = "/reviews/";
+
+    public static final String SUBMIT_REVIEW = "/reviews/";
+
     public static String productBySlug(String slug) {
         return "/products/" + slug;
     }
