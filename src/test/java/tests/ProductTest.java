@@ -1,6 +1,7 @@
 package tests;
 
 import backend.application.ProductAPI;
+import constants.StatusCodes;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,7 +18,7 @@ public class ProductTest {
 
         Assert.assertEquals(
                 response.statusCode(),
-                200
+                StatusCodes.OK
         );
     }
 
@@ -52,8 +53,10 @@ public class ProductTest {
                 );
 
         Assert.assertTrue(
-                response.statusCode() == 400
-                        || response.statusCode() == 404
+                response.statusCode() == StatusCodes.BAD_REQUEST
+                        || response.statusCode() == StatusCodes.NOT_FOUND,
+                "Expected status code 400 or 404 but got: "
+                + response.statusCode()
         );
     }
 }
