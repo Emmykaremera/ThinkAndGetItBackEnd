@@ -34,4 +34,32 @@ public class ProductAPI {
                 .extract()
                 .response();
     }
+
+    public Response getFlashSalesProduct(){
+        return RestAssured
+                .given()
+                .spec(RequestSpec.getRequestSpec())
+                .log().all()
+                .when()
+                .get(Routes.FLASH_SALES_PRODUCTS)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+    public Response getInvalidFlashSalesProduct(){
+        return RestAssured
+                .given()
+                .spec(RequestSpec.getRequestSpec())
+                .log().all()
+                .when()
+                .get("/products/flashin")
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+
 }
