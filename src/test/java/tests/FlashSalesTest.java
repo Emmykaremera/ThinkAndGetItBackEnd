@@ -16,7 +16,6 @@ public class FlashSalesTest {
     @Test
     public void getFlashSalesProductsSuccessTest() {
         Response response = productAPI.getFlashSalesProduct();
-        response.then().log().all();
         Assert.assertEquals(response.statusCode(), OK);
         Assert.assertTrue(response.jsonPath().getBoolean("success"));
         Assert.assertEquals(response.jsonPath().getString("message"), "Success");

@@ -54,7 +54,7 @@ public class ProductAPI {
                 .spec(RequestSpec.getRequestSpec())
                 .log().all()
                 .when()
-                .get("/products/flashin")
+                .get(Routes.INVALID_FLASH_SALES)
                 .then()
                 .log().all()
                 .extract()

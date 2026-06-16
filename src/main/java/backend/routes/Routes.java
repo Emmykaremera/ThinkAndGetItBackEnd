@@ -34,6 +34,8 @@ public class Routes {
 
     public static final String FLASH_SALES_PRODUCTS = "/products/flash-sales";
 
+    public static final String INVALID_FLASH_SALES = "/products/flashin";
+
     public static String productBySlug(String slug) {
         return "/products/" + slug;
     }
