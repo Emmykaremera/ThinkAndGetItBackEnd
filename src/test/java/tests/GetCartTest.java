@@ -53,6 +53,7 @@ public class GetCartTest {
 
         response.then().log().all();
 
+
         Assert.assertEquals(
                 response.statusCode(),
                 200
