@@ -5,6 +5,8 @@ import backend.spec.RequestSpec;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
+import static backend.routes.Routes.TRENDING_PRODUCTS;
+
 public class ProductAPI {
 
     public Response getAllProducts() {
@@ -55,6 +57,36 @@ public class ProductAPI {
                 .log().all()
                 .when()
                 .get(Routes.INVALID_FLASH_SALES)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+    public Response getTrendingProducts() {
+
+        return RestAssured
+                .given()
+                .spec(RequestSpec.getRequestSpec())
+                .log().all()
+                .when()
+                .get(TRENDING_PRODUCTS)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+
+
+    public Response getInvalidTradingProducts(){
+
+        return RestAssured
+                .given()
+                .spec(RequestSpec.getRequestSpec())
+                .log().all()
+                .when()
+                .get(TRENDING_PRODUCTS)
                 .then()
                 .log().all()
                 .extract()
