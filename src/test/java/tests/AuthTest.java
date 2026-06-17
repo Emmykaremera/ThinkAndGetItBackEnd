@@ -1,10 +1,12 @@
 package tests;
 import backend.application.AuthAPI;
 import backend.utils.ConfigReader;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class AuthTest {
@@ -59,5 +61,16 @@ public class AuthTest {
         response.then().log().all();
 
         Assert.assertEquals(response.statusCode(), 401);
+    }
+
+    public static Response login(String email, String password) {
+
+        return RestAssured
+                .given()
+                .body(Map.of(
+                        "email", email,
+                        "password", password
+                ))
+                .post("/auth/login");
     }
 }

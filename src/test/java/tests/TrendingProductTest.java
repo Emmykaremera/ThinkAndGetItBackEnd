@@ -14,7 +14,7 @@ public class TrendingProductTest extends BaseTest {
     ProductAPI productAPI = new ProductAPI();
 
     @Test
-    public void getTradingProductsSuccessTest(){
+    public void getTrendingProductsSuccessTest(){
         Response response = productAPI.getTrendingProducts();
         Assert.assertEquals(response.statusCode(), OK);
         Assert.assertTrue(response.jsonPath().getBoolean("success"));
@@ -29,12 +29,9 @@ public class TrendingProductTest extends BaseTest {
     }
 
     @Test
-    public void getTradingProductsShouldRespondInFiveSeconds(){
+    public void getTrendingProductsShouldRespondInFiveSeconds(){
         Response response = productAPI.getTrendingProducts();
         Assert.assertTrue(response.time() < 5000);
     }
-
-
-
-
+    
 }

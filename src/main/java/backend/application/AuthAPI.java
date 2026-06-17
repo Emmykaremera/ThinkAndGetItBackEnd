@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class AuthAPI {
 
+
     public Response register(String email, String password, String firstName, String lastName, String phone) {
 
         Map<String, String> body = new HashMap<>();
@@ -32,7 +33,7 @@ public class AuthAPI {
                 .response();
     }
 
-    public Response login(String email, String password) {
+    public static Response login(String email, String password) {
 
         Map<String, String> body = new HashMap<>();
         body.put("email", email);
